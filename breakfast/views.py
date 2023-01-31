@@ -1,6 +1,7 @@
 from datetime import datetime
 
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView,DetailView
+from .models import Breakfast
 
 
 class IndexView(TemplateView):
@@ -17,3 +18,21 @@ class IndexView(TemplateView):
         else:
             context['message'] = 'こんばんは'
         return context
+
+
+class BreakfastListView(ListView):
+    model = Breakfast
+    template_name = 'breakfast/list.html'
+    context_object_name = 'breakfast_list'
+
+    def get_queryset(self):
+        return Breakfast.objects.order_by('-date')
+
+
+class ItemDetailView(DetailView):
+    model = Breakfast
+    template_name = 'breakfast/detail.html'
+    context_object_name = 'breakfast'
+
+    def get_queryset(self):
+        return Breakfast.objects.all()
