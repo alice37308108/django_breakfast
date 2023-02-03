@@ -36,7 +36,7 @@
 </p>
 {#<link rel="stylesheet" href="{% static 'breakfast/style.css' %}">#}
 <img src="{% static "/breakfast/images/image.png"%}" alt="Dinosaur">
-<button type="button" class="btn btn--orange btn--radius" onclick="location.href='http://127.0.0.1:8000/breakfast/list'">
+<button type="button" class="btn btn--orange btn--radius" onclick="location.href={% url 'breakfast:list' %}">
     list
 </button>
 </body>

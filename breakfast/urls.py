@@ -3,6 +3,7 @@ from django.urls import path, include
 
 from breakfast.views import IndexView, BreakfastListView, ItemDetailView
 
+app_name = 'breakfast'
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('list/', BreakfastListView.as_view(), name='list'),
