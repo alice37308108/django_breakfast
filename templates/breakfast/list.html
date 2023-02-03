@@ -1,5 +1,14 @@
-{% for item in breakfast_list %}
-<ul>
-    <li>{{ item.date }}</li>
-</ul>
-{% endfor %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>朝ごはんアプリ🍚</title>
+</head>
+<body>
+    {% for item in breakfast_list %}
+    <ul>
+        <li>{{ item.date }}</li>
+    </ul>
+    {% endfor %}
+</html>

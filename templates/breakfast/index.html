@@ -1,5 +1,43 @@
+<!DOCTYPE html>
 {% load static %}
-<link rel="stylesheet" href="{% static 'breakfast/style.css' %}">
-<p><h3>{{ now }}</h3></p>
-<p><h3>{{ message }} aliceさん</h3></p>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>朝ごはんアプリ🍚</title>
+    <style>
+        .btn {
+            display: inline-block;
+            padding: 0.5em 1em;
+            text-decoration: none;
+            background: #CC99FF;
+            color: #FFF;
+            border-bottom: solid 4px #627295;
+            border-radius: 3px;
+        }
 
+        .btn:active {
+            -webkit-transform: translateY(4px);
+            transform: translateY(4px);
+            border-bottom: none;
+        }
+
+        p{
+            text-align: left;
+            font-size: 20px;
+            font-weight: bold;
+            color: #990099	;
+        }
+    </style>
+</head>
+<body>
+<p>
+    {{ now }}<br>
+    {{ message }} aliceさん
+</p>
+{#<link rel="stylesheet" href="{% static 'breakfast/style.css' %}">#}
+<img src="{% static "/breakfast/images/image.png"%}" alt="Dinosaur">
+<button type="button" class="btn btn--orange btn--radius" onclick="location.href='http://127.0.0.1:8000/breakfast/list'">
+    list
+</button>
+</body>
+</html>
