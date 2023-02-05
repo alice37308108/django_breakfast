@@ -1,7 +1,11 @@
 from datetime import datetime
 
-from django.views.generic import TemplateView, ListView,DetailView
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from django.urls import reverse
+from django.views.generic import TemplateView, ListView, DetailView
 from .models import Breakfast
+from .forms import BreakfastForm
 
 
 class IndexView(TemplateView):
@@ -36,3 +40,24 @@ class ItemDetailView(DetailView):
 
     def get_queryset(self):
         return Breakfast.objects.all()
+
+
+"""
+Todo:
+    以下のコードを確認する
+"""
+# class BreakfastCreateView(TemplateView):
+#     template_name = 'breakfast/create.html'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['form'] = BreakfastForm()
+#         return context
+#
+#     def post(self, request, *args, **kwargs):
+#         form = BreakfastForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponseRedirect(reverse('breakfast:list'))
+#         else:
+#             return render(request, 'breakfast/create.html', {'form': form})
