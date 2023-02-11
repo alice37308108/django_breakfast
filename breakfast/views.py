@@ -2,8 +2,8 @@ from datetime import datetime
 
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.urls import reverse
-from django.views.generic import TemplateView, ListView, DetailView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from .models import Breakfast
 from .forms import BreakfastForm
 
@@ -42,22 +42,8 @@ class ItemDetailView(DetailView):
         return Breakfast.objects.all()
 
 
-"""
-Todo:
-    以下のコードを確認する
-"""
-# class BreakfastCreateView(TemplateView):
-#     template_name = 'breakfast/create.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['form'] = BreakfastForm()
-#         return context
-#
-#     def post(self, request, *args, **kwargs):
-#         form = BreakfastForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect(reverse('breakfast:list'))
-#         else:
-#             return render(request, 'breakfast/create.html', {'form': form})
+class BreakfastCreateView(CreateView):
+    template_name = 'breakfast/create.html'
+    model = Breakfast
+    fields = ('date', 'hours_of_sleep', 'breakfast', 'sleep_quality', 'feeling', 'sweet', 'memo')
+    success_url = reverse_lazy('breakfast:list')
