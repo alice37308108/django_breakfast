@@ -1,19 +1,16 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>朝ごはんアプリ🍚</title>
-</head>
-<body>
-<ul>
-    <li>日　　付：{{ breakfast.date }}</li>
-    <li>睡眠時間：{{ breakfast.hours_of_sleep }}</li>
-    <li>朝ごはん：{{ breakfast.breakfast }}</li>
-    <li>睡眠の質：{{ breakfast.sleep_quality }}</li>
-    <li>気　　分：{{ breakfast.feeling }}</li>
-    <li>お や つ：{{ breakfast.sweet }}</li>
-    <li>メ　　モ：{{ breakfast.memo }}</li>
-</ul>
-</body>
-</html>
+{% extends "breakfast/base.html" %}
+
+{% block title %}朝ごはんアプリ🍚{% endblock %}
+
+{% block content %}
+    <h2>🍚朝ごはん詳細🍚</h2>
+        <ul>
+            <li>日　　付：{{ breakfast.date }}</li>
+            <li>睡眠時間：{{ breakfast.hours_of_sleep }}</li>
+            <li>朝ごはん：{{ breakfast.breakfast }}</li>
+            <li>睡眠の質：{{ breakfast.sleep_quality }}</li>
+            <li>気　　分：{{ breakfast.feeling }}</li>
+            <li>お や つ：{{ breakfast.sweet }}</li>
+            <li>メ　　モ：{{ breakfast.memo }}</li>
+        </ul>
+{% endblock %}

@@ -1,7 +1,10 @@
-{#{ % block content %}#}
-<form action="" method="POST">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value = "作成する">
-</form>
+{% extends "breakfast/base.html" %}
+{% block title %}朝ごはんアプリ🍚{% endblock %}
 
-{#{ % endblock content %}#}
+{% block content %}
+    <h2>🍚朝ごはん登録🍚</h2>
+        <form action="" method="POST">{% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value = "作成する">
+        </form>
+{% endblock %}

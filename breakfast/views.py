@@ -1,11 +1,10 @@
 from datetime import datetime
 
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
-from .models import Breakfast
+
 from .forms import BreakfastForm
+from .models import Breakfast
 
 
 class IndexView(TemplateView):
@@ -42,8 +41,20 @@ class ItemDetailView(DetailView):
         return Breakfast.objects.all()
 
 
+# class BreakfastCreateView(CreateView):
+#     template_name = 'breakfast/create.html'
+#     model = Breakfast
+#     fields = ('date', 'hours_of_sleep', 'breakfast', 'sleep_quality', 'feeling', 'sweet', 'memo')
+#     success_url = reverse_lazy('breakfast:list')
+
 class BreakfastCreateView(CreateView):
     template_name = 'breakfast/create.html'
     model = Breakfast
-    fields = ('date', 'hours_of_sleep', 'breakfast', 'sleep_quality', 'feeling', 'sweet', 'memo')
+    form_class = BreakfastForm
+    # 成功した時のURL
     success_url = reverse_lazy('breakfast:list')
+
+    # 成功した時に実行される処理
+    # def get_success_url(self):
+    #     messages.success(self.request, '登録しました。')
+    #     return resolve_url('breakfast:list')
