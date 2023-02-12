@@ -1,7 +1,8 @@
 from datetime import datetime
+from django.utils import timezone
 
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, ListView, DetailView, CreateView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, FormView
 
 from .forms import BreakfastForm
 from .models import Breakfast
@@ -41,20 +42,23 @@ class ItemDetailView(DetailView):
         return Breakfast.objects.all()
 
 
-# class BreakfastCreateView(CreateView):
-#     template_name = 'breakfast/create.html'
-#     model = Breakfast
-#     fields = ('date', 'hours_of_sleep', 'breakfast', 'sleep_quality', 'feeling', 'sweet', 'memo')
-#     success_url = reverse_lazy('breakfast:list')
+class BreakfastFormView(FormView):
+    form_class = BreakfastForm
+    template_name = 'breakfast/create.html'
+    success_url = reverse_lazy('breakfast:list')
+
+    def form_valid(self, form):
+        # form.save()
+        return super().form_valid(form)
+
 
 class BreakfastCreateView(CreateView):
-    template_name = 'breakfast/create.html'
     model = Breakfast
     form_class = BreakfastForm
     # 成功した時のURL
     success_url = reverse_lazy('breakfast:list')
 
-    # 成功した時に実行される処理
-    # def get_success_url(self):
-    #     messages.success(self.request, '登録しました。')
-    #     return resolve_url('breakfast:list')
+# 成功した時に実行される処理
+# def get_success_url(self):
+#     messages.success(self.request, '登録しました。')
+#     return resolve_url('breakfast:list')
