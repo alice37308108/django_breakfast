@@ -13,7 +13,7 @@ from .models import Breakfast
 #         fields = ('date', 'hours_of_sleep', 'breakfast', 'sleep_quality', 'feeling', 'sweet', 'memo',)
 
 class BreakfastForm(forms.Form):
-    date = forms.DateField(label='日付')
+    date = forms.DateTimeField(label='日付')
     hours_of_sleep = forms.IntegerField(label='睡眠時間')
     breakfast = forms.CharField(label='朝食')
     sleep_quality = forms.IntegerField(label='睡眠の質')
@@ -21,11 +21,11 @@ class BreakfastForm(forms.Form):
     sweet = forms.CharField(label='お菓子')
     memo = forms.CharField(label='メモ', required=False)
 
-    # def clean_date(self):
-    #     date = self.cleaned_data['date']
-    #     if date > timezone.now():
-    #         raise ValidationError('未来の日付は入力できません。')
-    #     return date
+    def clean_date(self):
+        date = self.cleaned_data['date']
+        if date > timezone.now():
+            raise ValidationError('未来の日付は入力できません。')
+        return date
 
     def clean_hours_of_sleep(self):
         hours_of_sleep = self.cleaned_data['hours_of_sleep']
