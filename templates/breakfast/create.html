@@ -4,9 +4,11 @@
 {% block content %}
     <h2>🍚朝ごはん登録🍚</h2>
         <form action="" method="POST">{% csrf_token %}
-            <table>
+            <table width="300" height="300">
                 {{ form.as_table }}
             </table>
-            <input type="submit" value = "作成する">
+            <p>
+                <input type="submit" value = "作成する">
+            </p>
         </form>
 {% endblock %}

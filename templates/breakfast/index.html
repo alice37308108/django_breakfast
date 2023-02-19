@@ -12,7 +12,9 @@
             background: #CC99FF;
             color: #FFF;
             border-bottom: solid 4px #627295;
-            border-radius: 3px;
+            border-radius: 10px;
+            margin: 10px;
+            width: 80px;
         }
 
         .btn:active {
@@ -35,9 +37,14 @@
     {{ message }} aliceさん
 </p>
 {#<link rel="stylesheet" href="{% static 'breakfast/style.css' %}">#}
-<img src="{% static "/breakfast/images/image.png"%}" alt="Dinosaur">
-<button type="button" class="btn btn--orange btn--radius" onclick="location.href={% url 'breakfast:list' %}">
-    list
+<img src="{% static "/breakfast/images/image.png"%}" alt="Dinosaur" width="350" height="500">
+<p>
+<button type="button" class="btn btn--orange btn--radius" onclick="location.href={% url 'breakfast:create' %}">
+    登録
 </button>
+<button type="button" class="btn btn--orange btn--radius" onclick="location.href={% url 'breakfast:list' %}">
+    編集
+</button>
+</p>
 </body>
 </html>
