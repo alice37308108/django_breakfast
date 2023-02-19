@@ -65,7 +65,7 @@ python manage.py createsuperuser
 2. fixture からデータをロード
 
 ```shell
-python python manage.py loaddata fixtures/breakfast.json
+python manage.py loaddata fixtures/breakfast.json
 ```
 
 サンプルデータ投入が済んだら、以下のページ等で表示を確かめてください。  
