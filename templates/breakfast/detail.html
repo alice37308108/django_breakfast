@@ -13,4 +13,8 @@
             <li>お や つ：{{ breakfast.sweet }}</li>
             <li>メ　　モ：{{ breakfast.memo }}</li>
         </ul>
+    <button type="button" class="btn btn--orange btn--radius" onclick="location.href={% url 'breakfast:update' pk=breakfast.pk %}">
+        編集
+    </button>
+
 {% endblock %}
