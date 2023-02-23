@@ -1,4 +1,5 @@
 {% extends "breakfast/base.html" %}
+{% load static %}
 {% block title %}朝ごはんアプリ🍚{% endblock %}
 
 {% block content %}
@@ -8,7 +9,11 @@
                 {{ form.as_table }}
             </table>
             <p>
-                <input type="submit" value = "作成する">
+                <input type="submit" value="作成する" class="button">
             </p>
         </form>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 {% endblock %}

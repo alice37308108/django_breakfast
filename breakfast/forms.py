@@ -1,5 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.forms import Textarea
 from django.utils import timezone
 
 from .models import Breakfast
@@ -7,11 +8,8 @@ from .models import Breakfast
 
 class BreakfastModelForm(forms.ModelForm):
     class Meta:
-        # どのモデルをフォームにするか指定
         model = Breakfast
         fields = "__all__"
-        # そのフォームの中から表示するフィールドを指定
-        # fields = ('date', 'hours_of_sleep', 'breakfast', 'sleep_quality', 'feeling', 'sweet', 'memo',)
 
 
 class BreakfastForm(forms.Form):
@@ -21,7 +19,7 @@ class BreakfastForm(forms.Form):
     sleep_quality = forms.IntegerField(label='睡眠の質')
     feeling = forms.IntegerField(label='気分')
     sweet = forms.CharField(label='お菓子')
-    memo = forms.CharField(label='メモ', required=False)
+    memo = forms.CharField(label='メモ')
 
     def clean_date(self):
         date = self.cleaned_data['date']

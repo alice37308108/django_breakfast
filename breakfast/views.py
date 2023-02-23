@@ -5,7 +5,7 @@ from django.shortcuts import resolve_url
 from django.utils import timezone
 
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, FormView, UpdateView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, FormView, UpdateView,DeleteView
 
 from .forms import BreakfastForm,BreakfastModelForm
 from .models import Breakfast
@@ -81,3 +81,16 @@ class BreakfastUpdateView(UpdateView):
 
     def get_success_url(self):
         return resolve_url('breakfast:detail', pk=self.kwargs['pk'])
+
+
+class BreakfastDeleteView(DeleteView):
+    template_name = 'breakfast/delete.html'
+    model = Breakfast
+    success_url = reverse_lazy('breakfast:list')
+
+    def get_queryset(self):
+        return Breakfast.objects.all()
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, '削除しました。')
+        return super().delete(request, *args, **kwargs)

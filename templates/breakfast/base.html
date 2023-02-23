@@ -1,13 +1,42 @@
 <!doctype html>
 <html lang="ja">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
         {% block title %}{% endblock %}
     </title>
-  </head>
-  <body>
-    {% block content %}{% endblock %}
-  </body>
+    <style>
+        .button {
+            width: 115px;
+            height: 25px;
+            background: #8c3dbd;
+            padding-left: 20px;
+            padding-right: 20px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            line-height: 25px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .button-container span {
+            width: 80px; /* 適切なサイズに調整してください */
+        }
+
+
+        .button-span {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+{% block content %}{% endblock %}
+</body>
 </html>

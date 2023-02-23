@@ -11,5 +11,10 @@
     </ul>
     {% endfor %}
     <img src="{% static "/breakfast/images/list.png"%}" alt="Dinosaur">
+    <p>
+        <span>
+            <a class="button" href="{% url 'breakfast:create' %}">登録</a><br>
+        </span>
+    </p>
 
 {% endblock %}

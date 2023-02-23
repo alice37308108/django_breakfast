@@ -4,6 +4,7 @@
 
 {% block content %}
     <h2>🍚朝ごはん詳細🍚</h2>
+    この内容を削除しますか？
     <ul>
         <li>日　　付：{{ breakfast.date }}</li>
         <li>睡眠時間：{{ breakfast.hours_of_sleep }}</li>
@@ -13,15 +14,13 @@
         <li>お や つ：{{ breakfast.sweet }}</li>
         <li>メ　　モ：{{ breakfast.memo }}</li>
     </ul>
+    <form method="post">
+        {% csrf_token %}
+{#        <input type="hidden" name="next" value="{{ next }}"/>#}
+        <input type="submit" value="削除" class="btn btn-danger"/>
+{#        <a class="button" href="{% url 'breakfast:list' %}">戻る</a>#}
 
-    <div class="button-container">
-        <span class="button-span">
-            <a class="button" href="{% url 'breakfast:update' pk=breakfast.pk %}">編集</a>
-        </span>
-        <span></span>
-        <span class="button-span">
-            <a class="button" href="{% url 'breakfast:delete' pk=breakfast.pk %}">削除</a>
-        </span>
-    </div>
+
+    </form>
 
 {% endblock %}

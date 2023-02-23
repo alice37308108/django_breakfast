@@ -5,7 +5,8 @@ from breakfast.views import (IndexView,
                              ItemDetailView,
                              BreakfastCreateView,
                              BreakfastFormView,
-                             BreakfastUpdateView)
+                             BreakfastUpdateView,
+                             BreakfastDeleteView)
 
 app_name = 'breakfast'
 urlpatterns = [
@@ -14,5 +15,6 @@ urlpatterns = [
     path('detail/<int:pk>/', ItemDetailView.as_view(), name='detail'),
     path('create/', BreakfastCreateView.as_view(), name='create'),
     path('update/<int:pk>/', BreakfastUpdateView.as_view(), name='update'),
+    path('delete/<int:pk>/', BreakfastDeleteView.as_view(), name='delete'),
     # path('create/', BreakfastFormView.as_view(), name='create'),
 ]
