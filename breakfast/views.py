@@ -5,9 +5,9 @@ from django.shortcuts import resolve_url
 from django.utils import timezone
 
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, FormView, UpdateView,DeleteView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, FormView, UpdateView, DeleteView
 
-from .forms import BreakfastForm,BreakfastModelForm
+from .forms import BreakfastForm, BreakfastModelForm
 from .models import Breakfast
 
 
@@ -44,6 +44,12 @@ class ItemDetailView(DetailView):
     def get_queryset(self):
         return Breakfast.objects.all()
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        breakfast = self.get_object()
+        context['feelings'] = range(breakfast.feeling)  # feelingのイテラブル
+        return context
+
 
 class BreakfastFormView(FormView):
     form_class = BreakfastForm
@@ -59,6 +65,7 @@ class BreakfastCreateView(CreateView):
     template_name = 'breakfast/form.html'
     form_class = BreakfastModelForm
     success_url = reverse_lazy('breakfast:list')
+
 
 # 成功した時に実行される処理
 # def get_success_url(self):
