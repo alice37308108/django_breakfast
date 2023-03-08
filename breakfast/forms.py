@@ -1,5 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.forms import Textarea
 from django.utils import timezone
 
@@ -7,6 +8,8 @@ from .models import Breakfast
 
 
 class BreakfastModelForm(forms.ModelForm):
+    feeling = forms.IntegerField(label='今日の気分',  validators=[MinValueValidator(1), MaxValueValidator(5)])
+
     class Meta:
         model = Breakfast
         fields = "__all__"

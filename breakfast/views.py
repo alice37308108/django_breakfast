@@ -31,6 +31,7 @@ class BreakfastListView(ListView):
     model = Breakfast
     template_name = 'breakfast/list.html'
     context_object_name = 'breakfast_list'
+    paginate_by = 2
 
     def get_queryset(self):
         return Breakfast.objects.order_by('-date')

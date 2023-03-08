@@ -1,15 +1,35 @@
 {% extends "breakfast/base.html" %}
 {% load static %}
-
 {% block title %}朝ごはんアプリ🍚{% endblock %}
 
 {% block content %}
     <h2>🍚朝ごはん一覧🍚</h2>
     {% for item in breakfast_list %}
-    <ul>
-        <li><a href = "{% url 'breakfast:detail' item.pk %}">{{ item.date }}</a></li>
-    </ul>
+        <ul>
+            <li><a href = "{% url 'breakfast:detail' item.pk %}">{{ item.date }}</a></li>
+        </ul>
     {% endfor %}
+
+    <!-- 前へ の部分 -->
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">前へ</a>
+    {% endif %}
+
+    <!-- 数字の部分 -->
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <span>{{ num }}</span>
+        {% else %}
+            <a href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    <!-- 次へ の部分 -->
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">次へ</a>
+    {% endif %}
+
+
     <img src="{% static "/breakfast/images/list.png"%}" alt="Dinosaur">
     <p>
         <span>

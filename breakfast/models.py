@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 
@@ -6,7 +7,7 @@ class Breakfast(models.Model):
     hours_of_sleep = models.IntegerField(verbose_name='睡眠時間')
     breakfast = models.CharField(max_length=200, verbose_name='朝ごはん')
     sleep_quality = models.IntegerField(verbose_name='睡眠の質')
-    feeling = models.IntegerField(verbose_name='今日の気分')
+    feeling = models.IntegerField(verbose_name='今日の気分', validators=[MinValueValidator(1), MaxValueValidator(5)])
     sweet = models.CharField(max_length=200, null=True, blank=True, verbose_name='おやつ')
     memo = models.CharField(max_length=200, null=True, blank=True, verbose_name='メモ')
 
