@@ -4,7 +4,7 @@ from breakfast.views import (IndexView,
                              BreakfastListView,
                              ItemDetailView,
                              BreakfastCreateView,
-                             BreakfastFormView,
+                             # BreakfastFormView,
                              BreakfastUpdateView,
                              BreakfastDeleteView)
 

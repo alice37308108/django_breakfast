@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, FormView, UpdateView, DeleteView
 
-from .forms import BreakfastForm, BreakfastModelForm
+from .forms import BreakfastModelForm #BreakfastForm
 from .models import Breakfast
 
 
@@ -53,14 +53,14 @@ class ItemDetailView(DetailView):
         return context
 
 
-class BreakfastFormView(FormView):
-    form_class = BreakfastForm
-    template_name = 'breakfast/form.html'
-    success_url = reverse_lazy('breakfast:list')
-
-    def form_valid(self, form):
-        # form.save()
-        return super().form_valid(form)
+# class BreakfastFormView(FormView):
+#     form_class = BreakfastForm
+#     template_name = 'breakfast/form.html'
+#     success_url = reverse_lazy('breakfast:list')
+#
+#     def form_valid(self, form):
+#         # form.save()
+#         return super().form_valid(form)
 
 
 class BreakfastCreateView(CreateView):
