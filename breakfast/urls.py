@@ -16,5 +16,6 @@ urlpatterns = [
     path('create/', BreakfastCreateView.as_view(), name='create'),
     path('update/<int:pk>/', BreakfastUpdateView.as_view(), name='update'),
     path('delete/<int:pk>/', BreakfastDeleteView.as_view(), name='delete'),
+    path('tag/<slug:tag>/', BreakfastListView.as_view(), name='tag'),
     # path('create/', BreakfastFormView.as_view(), name='create'),
 ]

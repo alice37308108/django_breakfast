@@ -45,12 +45,12 @@ class ItemDetailView(DetailView):
     def get_queryset(self):
         return Breakfast.objects.all()
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        breakfast = self.get_object()
-        # context['feelings'] = range(breakfast.feeling)
-        context['feelings'] = dict(feeling='★' * breakfast.feeling + '☆' * (5 - breakfast.feeling))
-        return context
+    # def get_context_data(self, **kwargs):　#モデルのメソッドで定義した
+    #     context = super().get_context_data(**kwargs)
+    #     breakfast = self.get_object()
+    #     # context['feelings'] = range(breakfast.feeling)
+    #     context['feelings'] = dict(feeling='★' * breakfast.feeling + '☆' * (5 - breakfast.feeling))
+    #     return context
 
 
 # class BreakfastFormView(FormView):

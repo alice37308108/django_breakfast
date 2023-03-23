@@ -6,7 +6,8 @@
     <h2>🍚朝ごはん一覧🍚</h2>
     {% for item in breakfast_list %}
         <ul>
-            <li><a href = "{% url 'breakfast:detail' item.pk %}">{{ item.date }}</a></li>
+            {#            <li><a href = "{% url 'breakfast:detail' item.pk %}">{{ item.date }}</a></li>#}
+            <li><a href="{{ item.get_absolute_url }}">{{ item.date }}</a></li>
         </ul>
     {% endfor %}
 
@@ -30,7 +31,7 @@
     {% endif %}
 
 
-    <img src="{% static "/breakfast/images/list.png"%}" alt="Dinosaur">
+    <img src="{% static "/breakfast/images/list.png" %}" alt="Dinosaur">
     <p>
         <span>
             <a class="button" href="{% url 'breakfast:create' %}">登録</a><br>

@@ -12,6 +12,13 @@
         <li>気　　分：{{ feelings.feeling }}</li>
         <li>お や つ：{{ breakfast.sweet }}</li>
         <li>メ　　モ：{{ breakfast.memo }}</li>
+        <li>タ　　グ：
+            {% for tag in breakfast.tags.all %}
+{#                <a href="{% url 'breakfast:tag' tag.slug %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}#}
+{#                <span><a href="{% url 'breakfast:tag' tag.slug %}">{{ tag.name }}</a>&nbsp;</span>#}
+                <span><a href="{% url 'breakfast:tag' tag.slug %}">{{ tag.name }}</a>&nbsp;</span>
+            {% endfor %}
+        </li>
     </ul>
 
     <div class="button-container">

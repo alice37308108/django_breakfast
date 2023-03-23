@@ -8,7 +8,7 @@ from .models import Breakfast
 
 
 class BreakfastModelForm(forms.ModelForm):
-    breakfast = forms.CharField(label='朝ごはん',max_length=10)
+    # breakfast = forms.CharField(label='朝ごはん', max_length=10)
 
     class Meta:
         model = Breakfast
