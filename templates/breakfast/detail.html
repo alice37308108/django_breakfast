@@ -6,12 +6,13 @@
     <h2>🍚朝ごはん詳細🍚</h2>
     <ul>
         <li>日　　付：{{ breakfast.date }}</li>
-        <li>睡眠時間：{{ breakfast.hours_of_sleep }}</li>
+        <li>睡眠時間：{{ breakfast.get_hours_of_sleep}}</li>
         <li>朝ごはん：{{ breakfast.breakfast }}</li>
-        <li>睡眠の質：{{ breakfast.sleep_quality }}</li>
-        <li>気　　分：{{ feelings.feeling }}</li>
+        <li>睡眠の質：{{ breakfast.get_sleep_quality }}</li>
+        <li>気　　分：{{ breakfast.get_feeling_stars }}</li>
         <li>お や つ：{{ breakfast.sweet }}</li>
         <li>メ　　モ：{{ breakfast.memo }}</li>
+        <li>カテゴリ：{{ breakfast.category }}</li>
         <li>タ　　グ：
             {% for tag in breakfast.tags.all %}
 {#                <a href="{% url 'breakfast:tag' tag.slug %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}#}
