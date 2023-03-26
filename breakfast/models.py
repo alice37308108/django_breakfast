@@ -6,6 +6,10 @@ from django.urls import reverse
 
 
 class Breakfast(models.Model):
+
+    class Meta:
+        ordering = ['-date']
+
     date = models.DateField(verbose_name='日付', unique=True)
     hours_of_sleep = models.IntegerField(verbose_name='睡眠時間', )
     breakfast = models.CharField(max_length=30, verbose_name='朝ごはん')

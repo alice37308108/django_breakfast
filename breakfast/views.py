@@ -103,3 +103,13 @@ class BreakfastDeleteView(DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, '削除しました。')
         return super().delete(request, *args, **kwargs)
+
+
+class ContactListView(ListView):
+    model = Breakfast
+    template_name = 'breakfast/page_list.html'
+    context_object_name = 'breakfast_list'
+    paginate_by = 2
+
+    def get_queryset(self):
+        return Breakfast.objects.order_by('-date')
