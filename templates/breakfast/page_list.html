@@ -1,12 +1,7 @@
-{#{% for contact in page_obj %}#}
-    {# Each "contact" is a Contact model object. #}
-{#    {{ contact.full_name|upper }}<br>#}
-{#    ...#}
-{#{% endfor %}#}
 <h3>🍚朝ごはん一覧🍚</h3>
 
 <div class="pagination">
-    {% for item in breakfast_list %}
+    {% for item in object_list %}
         <ul>
             <a href="{{ item.get_absolute_url }}">{{ item.date }}</a>
         </ul>

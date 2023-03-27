@@ -108,8 +108,8 @@ class BreakfastDeleteView(DeleteView):
 class ContactListView(ListView):
     model = Breakfast
     template_name = 'breakfast/page_list.html'
-    context_object_name = 'breakfast_list'
     paginate_by = 2
 
-    def get_queryset(self):
-        return Breakfast.objects.order_by('-date')
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context

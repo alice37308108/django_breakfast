@@ -8,7 +8,7 @@ def paginator_test():
 
     print(p.count)  # 5
     print(p.num_pages)  # 3
-    type(p.page_range)  # <class 'range'>
+    print(type(p.page_range))  # <class 'range'>
     print(p.page_range)  # range(1, 4)
 
     page1 = p.page(1)
