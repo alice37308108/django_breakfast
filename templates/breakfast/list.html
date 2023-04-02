@@ -7,7 +7,14 @@
     {% for item in breakfast_list %}
         <ul>
             {#            <li><a href = "{% url 'breakfast:detail' item.pk %}">{{ item.date }}</a></li>#}
-            <li><a href="{{ item.get_absolute_url }}">{{ item.date }}</a></li>
+            <li><a href="{{ item.get_absolute_url }}">🍚</a>  {{ item.date }}  {{ item.breakfast }}</li>
+                <p>
+                    タグ:&nbsp;
+                    {% for tag in item.tags.all %}
+                        <span><a href="{% url 'breakfast:tag' tag.slug %}">{{ tag }}</a>&nbsp;</span>
+                    {% endfor %}
+                </p>
+
         </ul>
     {% endfor %}
 
