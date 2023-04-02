@@ -6,7 +6,6 @@ from django.urls import reverse
 
 
 class Breakfast(models.Model):
-
     class Meta:
         ordering = ['-date']
 
@@ -19,6 +18,7 @@ class Breakfast(models.Model):
     memo = models.CharField(max_length=200, blank=True, verbose_name='メモ')  # CharField、TextFieldときはnull=Trueはいらない
     category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='カテゴリ')
     tags = models.ManyToManyField('Tag', blank=True, verbose_name='タグ')
+    image = models.ImageField(upload_to='images', blank=True, verbose_name='画像')
 
     def __str__(self):
         return self.date.strftime('%Y/%m/%d')

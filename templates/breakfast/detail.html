@@ -6,7 +6,7 @@
     <h2>🍚朝ごはん詳細🍚</h2>
     <ul>
         <li>日　　付：{{ breakfast.date }}</li>
-        <li>睡眠時間：{{ breakfast.get_hours_of_sleep}}</li>
+        <li>睡眠時間：{{ breakfast.get_hours_of_sleep }}</li>
         <li>朝ごはん：{{ breakfast.breakfast }}</li>
         <li>睡眠の質：{{ breakfast.get_sleep_quality }}</li>
         <li>気　　分：{{ breakfast.get_feeling_stars }}</li>
@@ -15,12 +15,12 @@
         <li>カテゴリ：{{ breakfast.category }}</li>
         <li>タ　　グ：
             {% for tag in breakfast.tags.all %}
-{#                <a href="{% url 'breakfast:tag' tag.slug %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}#}
-{#                <span><a href="{% url 'breakfast:tag' tag.slug %}">{{ tag.name }}</a>&nbsp;</span>#}
                 <span><a href="{% url 'breakfast:tag' tag.slug %}">{{ tag.name }}</a>&nbsp;</span>
             {% endfor %}
         </li>
     </ul>
+    <img width="200px" height="200px" src="{{ breakfast.image.url }}" alt="{{ breakfast.title }}">
+
 
     <div class="button-container">
         <span class="button-span">
