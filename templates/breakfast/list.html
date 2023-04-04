@@ -4,19 +4,32 @@
 
 {% block content %}
     <h2>🍚朝ごはん一覧🍚</h2>
+
+    <form method="get">
+        <input type="text" name="search" placeholder="朝ごはん検索...">
+        <button type="submit">検索</button>
+    </form>
+
     {% for item in breakfast_list %}
         <ul>
             {#            <li><a href = "{% url 'breakfast:detail' item.pk %}">{{ item.date }}</a></li>#}
-            <li><a href="{{ item.get_absolute_url }}">🍚</a>  {{ item.date }}  {{ item.breakfast }}</li>
-                <p>
-                    タグ:&nbsp;
-                    {% for tag in item.tags.all %}
-                        <span><a href="{% url 'breakfast:tag' tag.slug %}">{{ tag }}</a>&nbsp;</span>
-                    {% endfor %}
-                </p>
+            <li><a href="{{ item.get_absolute_url }}">🍚</a> {{ item.date }} {{ item.breakfast }}</li>
 
         </ul>
     {% endfor %}
+
+    <p>
+        タグ検索:&nbsp;
+        {% for tag in tag_queryset %}
+            {% if tag.slug == tag %}
+                <span>{{ tag }}</span>
+            {% else %}
+                <span><a href="{% url 'breakfast:tag' tag.slug %}">{{ tag }}</a></span>
+            {% endif %}
+        {% endfor %}
+    </p>
+
+    <p><a href="{% url 'breakfast:list' %}">タグ解除</a></p>
 
     <!-- 前へ の部分 -->
     {% if page_obj.has_previous %}

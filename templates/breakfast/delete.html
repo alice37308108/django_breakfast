@@ -14,11 +14,17 @@
         <li>お や つ：{{ breakfast.sweet }}</li>
         <li>メ　　モ：{{ breakfast.memo }}</li>
     </ul>
+
+    {% if breakfast.image.file %}
+        <img width="200px" height="200px" src="{{ breakfast.image.url }}" alt="{{ breakfast.title }}">
+    {% else %}
+        <td class="td_image">No image</td>
+    {% endif %}
+
+
     <form method="post">
         {% csrf_token %}
-{#        <input type="hidden" name="next" value="{{ next }}"/>#}
         <input type="submit" value="削除" class="btn btn-danger"/>
-{#        <a class="button" href="{% url 'breakfast:list' %}">戻る</a>#}
 
 
     </form>

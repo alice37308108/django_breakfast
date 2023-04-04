@@ -5,21 +5,29 @@
 {% block content %}
     <h2>🍚朝ごはん詳細🍚</h2>
     <ul>
-        <li>日　　付：{{ breakfast.date }}</li>
-        <li>睡眠時間：{{ breakfast.get_hours_of_sleep }}</li>
-        <li>朝ごはん：{{ breakfast.breakfast }}</li>
-        <li>睡眠の質：{{ breakfast.get_sleep_quality }}</li>
-        <li>気　　分：{{ breakfast.get_feeling_stars }}</li>
-        <li>お や つ：{{ breakfast.sweet }}</li>
-        <li>メ　　モ：{{ breakfast.memo }}</li>
-        <li>カテゴリ：{{ breakfast.category }}</li>
-        <li>タ　　グ：
+        <li>日　 付 ：{{ breakfast.date }}</li>
+        <li>睡眠時間 ：{{ breakfast.get_hours_of_sleep }}</li>
+        <li>朝ごはん ：{{ breakfast.breakfast }}</li>
+        <li>睡眠の質 ：{{ breakfast.get_sleep_quality }}</li>
+        <li>気　　分 ：{{ breakfast.get_feeling_stars }}</li>
+        <li>日中の眠気 ：{{ breakfast.get_daytime_sleepiness }}</li>
+        <li>お や つ ：{{ breakfast.sweet }}</li>
+        <li>メ　　モ ：{{ breakfast.memo }}</li>
+        <li>今日の感想：{{ breakfast.impressions_of_the_day }}</li>
+        <li>カテゴリ ：{{ breakfast.category }}</li>
+        <li>タ　　グ ：
             {% for tag in breakfast.tags.all %}
-                <span><a href="{% url 'breakfast:tag' tag.slug %}">{{ tag.name }}</a>&nbsp;</span>
+                <span>{{ tag.name }}&nbsp;</span>
             {% endfor %}
         </li>
     </ul>
-    <img width="200px" height="200px" src="{{ breakfast.image.url }}" alt="{{ breakfast.title }}">
+
+
+    {% if breakfast.image %}
+        <img width="200px" height="200px" src="{{ breakfast.image.url }}" alt="{{ breakfast.title }}">
+    {% else %}
+        <td class="td_image">No image</td>
+    {% endif %}
 
 
     <div class="button-container">
@@ -30,6 +38,11 @@
         <span class="button-span">
             <a class="button" href="{% url 'breakfast:delete' pk=breakfast.pk %}">削除</a>
         </span>
+        <span></span>
+        <span class="button-span">
+            <a class="button" href="{% url 'breakfast:list' %}">戻る</a>
+        </span>
+
     </div>
 
 {% endblock %}

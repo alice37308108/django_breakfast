@@ -2,13 +2,15 @@ from datetime import datetime
 
 from django.core.checks import messages
 from django.shortcuts import resolve_url
-from django.utils import timezone
 
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, FormView, UpdateView, DeleteView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from .forms import BreakfastModelForm #BreakfastForm
-from .models import Breakfast
+from .forms import BreakfastModelForm
+from .models import Breakfast, Tag
+
+from django.shortcuts import get_object_or_404, redirect
+from django.views.decorators.http import require_POST
 
 
 class IndexView(TemplateView):
@@ -31,10 +33,26 @@ class BreakfastListView(ListView):
     model = Breakfast
     template_name = 'breakfast/list.html'
     context_object_name = 'breakfast_list'
-    paginate_by = 2
+    paginate_by = 5
 
     def get_queryset(self):
-        return Breakfast.objects.order_by('-date')
+        qs = Breakfast.objects.order_by('-date')
+        tag_slug = self.kwargs.get('tag')
+        if tag_slug:
+            qs = qs.filter(tags__slug=tag_slug)
+        search_query = self.request.GET.get('search')
+        if search_query:
+            qs = qs.filter(breakfast__icontains=search_query)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tag'] = self.kwargs.get('tag')
+        if context['tag']:
+            context['tag_queryset'] = Tag.objects.filter(slug=context['tag'])
+        else:
+            context['tag_queryset'] = Tag.objects.all()
+        return context
 
 
 class ItemDetailView(DetailView):
@@ -45,22 +63,9 @@ class ItemDetailView(DetailView):
     def get_queryset(self):
         return Breakfast.objects.all()
 
-    # def get_context_data(self, **kwargs):　#モデルのメソッドで定義した
-    #     context = super().get_context_data(**kwargs)
-    #     breakfast = self.get_object()
-    #     # context['feelings'] = range(breakfast.feeling)
-    #     context['feelings'] = dict(feeling='★' * breakfast.feeling + '☆' * (5 - breakfast.feeling))
-    #     return context
-
-
-# class BreakfastFormView(FormView):
-#     form_class = BreakfastForm
-#     template_name = 'breakfast/form.html'
-#     success_url = reverse_lazy('breakfast:list')
-#
-#     def form_valid(self, form):
-#         # form.save()
-#         return super().form_valid(form)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
 
 class BreakfastCreateView(CreateView):
