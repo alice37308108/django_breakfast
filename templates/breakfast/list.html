@@ -8,10 +8,6 @@
     <form method="get">
         <label for="search">朝ごはん検索:</label>
         <input type="text" name="search" placeholder="朝ごはん検索...">
-        <button type="submit">検索</button>
-    </form>
-
-    <form method="get">
         <label for="feeling">今日の気分:</label>
         <select name="feeling" id="feeling">
             <option value="">---</option>
@@ -26,7 +22,9 @@
 
     {% for item in breakfast_list %}
         <ul>
-            <li><a href="{{ item.get_absolute_url }}">🍚</a> {{ item.date }} {{ item.breakfast }} {{ item.impressions_of_the_day }} {{ item.feeling }}</li>
+            <li>
+                <a href="{{ item.get_absolute_url }}">🍚</a> {{ item.date }} {{ item.breakfast }} {{ item.impressions_of_the_day }} {{ item.feeling }}
+            </li>
 
         </ul>
     {% endfor %}
@@ -42,7 +40,7 @@
         {% endfor %}
     </p>
 
-    <p><a href="{% url 'breakfast:list' %}">タグ解除</a></p>
+    <p><a href="{% url 'breakfast:list' %}">検索解除</a></p>
 
     <!-- 前へ の部分 -->
     {% if page_obj.has_previous %}
