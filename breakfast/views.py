@@ -43,6 +43,9 @@ class BreakfastListView(ListView):
         search_query = self.request.GET.get('search')
         if search_query:
             qs = qs.filter(breakfast__icontains=search_query)
+        feeling_query = self.request.GET.get('feeling')
+        if feeling_query:
+            qs = qs.filter(feeling__exact=feeling_query)
         return qs
 
     def get_context_data(self, **kwargs):

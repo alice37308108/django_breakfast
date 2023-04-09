@@ -3,16 +3,29 @@
 {% block title %}朝ごはんアプリ🍚{% endblock %}
 
 {% block content %}
-    <h2>🍚朝ごはん一覧🍚</h2>
+    <h2>🍚朝ごはん一覧🍚</h2
 
     <form method="get">
+        <label for="search">朝ごはん検索:</label>
         <input type="text" name="search" placeholder="朝ごはん検索...">
+        <button type="submit">検索</button>
+    </form>
+
+    <form method="get">
+        <label for="feeling">今日の気分:</label>
+        <select name="feeling" id="feeling">
+            <option value="">---</option>
+            <option value="1">1 😢</option>
+            <option value="2">2 😕</option>
+            <option value="3">3 😐</option>
+            <option value="4">4 🙂</option>
+            <option value="5">5 😃</option>
+        </select>
         <button type="submit">検索</button>
     </form>
 
     {% for item in breakfast_list %}
         <ul>
-            {#            <li><a href = "{% url 'breakfast:detail' item.pk %}">{{ item.date }}</a></li>#}
             <li><a href="{{ item.get_absolute_url }}">🍚</a> {{ item.date }} {{ item.breakfast }}</li>
 
         </ul>
