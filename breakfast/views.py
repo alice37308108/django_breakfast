@@ -37,9 +37,6 @@ class BreakfastListView(ListView):
 
     def get_queryset(self):
         qs = Breakfast.objects.order_by('-date')
-        tag_slug = self.kwargs.get('tag')
-        if tag_slug:
-            qs = qs.filter(tags__slug=tag_slug)
         search_query = self.request.GET.get('search')
         if search_query:
             qs = qs.filter(breakfast__icontains=search_query)

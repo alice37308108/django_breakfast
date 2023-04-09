@@ -3,7 +3,7 @@
 {% block title %}朝ごはんアプリ🍚{% endblock %}
 
 {% block content %}
-    <h2>🍚朝ごはん一覧🍚</h2
+    <h2>🍚朝ごはん一覧🍚</h2>
 
     <form method="get">
         <label for="search">朝ごはん検索:</label>
@@ -26,7 +26,7 @@
 
     {% for item in breakfast_list %}
         <ul>
-            <li><a href="{{ item.get_absolute_url }}">🍚</a> {{ item.date }} {{ item.breakfast }}</li>
+            <li><a href="{{ item.get_absolute_url }}">🍚</a> {{ item.date }} {{ item.breakfast }} {{ item.impressions_of_the_day }} {{ item.feeling }}</li>
 
         </ul>
     {% endfor %}
