@@ -1,3 +1,4 @@
+from breakfast import views
 from django.urls import path
 
 from breakfast.views import (IndexView,
@@ -18,5 +19,11 @@ urlpatterns = [
     path('delete/<int:pk>/', BreakfastDeleteView.as_view(), name='delete'),
     path('tag/<slug:tag>/', BreakfastListView.as_view(), name='tag'),
     path('page_list', ContactListView.as_view(), name='page_list'),
+
+    path('signup/', views.signup_view, name='signup'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('user/', views.user_view, name='user'),
+    path('other/', views.other_view, name='other'),
     # path('create/', BreakfastFormView.as_view(), name='create'),
 ]

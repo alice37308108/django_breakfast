@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
 from .models import Breakfast
@@ -25,3 +27,12 @@ class BreakfastModelForm(forms.ModelForm):
                 raise ValidationError('朝食とおやつが一緒なのはどうなのでしょうか？')
             return cleaned_data
 
+
+class SignupForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+
+
+class LoginForm(AuthenticationForm):
+    pass

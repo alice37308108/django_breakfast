@@ -1,16 +1,64 @@
 from datetime import datetime
 
+from django.contrib.auth import login
 from django.core.checks import messages
 from django.shortcuts import resolve_url
 
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from .forms import BreakfastModelForm
+from .forms import BreakfastModelForm, SignupForm, LoginForm
 from .models import Breakfast, Tag
 
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import render
 from django.views.decorators.http import require_POST
+
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = SignupForm()
+
+    param = {
+        'form': form
+    }
+
+    return render(request, 'breakfast/signup.html', param)
+
+
+def login_view(request):  # ユーザーのログイン
+    if request.method == 'POST':
+        form = LoginForm(request,data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+
+            if user:
+                login(request,user)
+    else:
+        form = LoginForm()
+
+    # コンテキスト変数を含めたparamの作成
+    index_view = IndexView()
+    index_context = index_view.get_context_data()
+    param = {
+        'form': form,
+        **index_context,
+    }
+    return render(request, 'breakfast/login.html', param)
+
+def logout_view(request):  # ユーザーのログアウト
+    pass
+
+
+def user_view(request):  # ログインユーザーの情報の表示
+    pass
+
+
+def other_view(request):  # 他のユーザーの情報の表示
+    pass
 
 
 class IndexView(TemplateView):
