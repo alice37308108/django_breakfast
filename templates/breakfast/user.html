@@ -1,0 +1,13 @@
+{%  load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>あなたの情報</title>
+</head>
+<body>
+    <h1>{{ user.username }}</h1>
+    <p>あなたのメールアドレスは{{ user.email }}です。</p>
+    <p>アカウント作成日は{{user.date_joined}}です。</p>
+</body>
+</html>

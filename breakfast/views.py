@@ -1,6 +1,8 @@
 from datetime import datetime
 
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.checks import messages
 from django.shortcuts import resolve_url
 
@@ -31,12 +33,12 @@ def signup_view(request):
 
 def login_view(request):  # ユーザーのログイン
     if request.method == 'POST':
-        form = LoginForm(request,data=request.POST)
+        form = LoginForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
 
             if user:
-                login(request,user)
+                login(request, user)
     else:
         form = LoginForm()
 
@@ -49,16 +51,33 @@ def login_view(request):  # ユーザーのログイン
     }
     return render(request, 'breakfast/login.html', param)
 
+
 def logout_view(request):  # ユーザーのログアウト
-    pass
+    logout(request)
+
+    return render(request, 'breakfast/logout.html')
 
 
+@login_required
 def user_view(request):  # ログインユーザーの情報の表示
-    pass
+    user = request.user
+    params = {
+        'user': user,
+    }
+
+    return render(request, 'breakfast/user.html', params)
 
 
+@login_required
 def other_view(request):  # 他のユーザーの情報の表示
-    pass
+    # 現在ログインしているユーザーを除外した全ユーザーをクエリセットとして取得
+    users = User.objects.exclude(username=request.user.username)  # excludeは除外
+
+    # 取得したクエリセットをparamsに格納
+    params = {
+        'users': users,
+    }
+    return render(request, 'breakfast/other.html', params)
 
 
 class IndexView(TemplateView):
