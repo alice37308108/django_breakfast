@@ -4,16 +4,13 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.checks import messages
+from django.shortcuts import render, redirect
 from django.shortcuts import resolve_url
-
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .forms import BreakfastModelForm, SignupForm, LoginForm
 from .models import Breakfast, Tag
-
-from django.shortcuts import render
-from django.views.decorators.http import require_POST
 
 
 def signup_view(request):
@@ -33,21 +30,24 @@ def signup_view(request):
 
 def login_view(request):  # ユーザーのログイン
     if request.method == 'POST':
+        next = request.POST.get('next')
         form = LoginForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
 
             if user:
                 login(request, user)
+                if next == 'None':
+                    return redirect('breakfast:index')
+                else:
+                    return redirect(next)
     else:
         form = LoginForm()
+        next = request.GET.get('next')
 
-    # コンテキスト変数を含めたparamの作成
-    index_view = IndexView()
-    index_context = index_view.get_context_data()
     param = {
         'form': form,
-        **index_context,
+        'next': next,
     }
     return render(request, 'breakfast/login.html', param)
 
